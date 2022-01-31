@@ -29,6 +29,12 @@ export default class Form extends Component {
     this.setState({ [name]: value })
   }
 
+
+  handleClear = (e) => {
+    e.target.reset()
+  }
+
+
   handleSubmit = e => {
     e.preventDefault()
     const { errors, ...sinErrors } = this.state
@@ -58,6 +64,7 @@ export default class Form extends Component {
           {errors.apellido && <small>{errors.apellido}</small>}
           <br />
           <button type="submit">Enviar</button>
+          <button type="reset" onChange={this.handleClear}>Limpiar</button>
         </form>
       </div>
     );
