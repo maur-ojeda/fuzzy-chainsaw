@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import axios from 'axios';
+import Userforms from './Components/Userforms'
+import ViewList from './Components/ViewList'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+
+  state = {
+    data: [],
+    ruta: 'lista',
+  }
+constructor(){
+  super()
+   axios.get('https://jsonplaceholder.typicode.com/users')
+    .then(({ data }) => this.setState({ data }))
 }
 
-export default App;
+seleccionaUsuario = id => {
+  console.log('seleccionaUsuario')
+ this.setState ({
+  ruta: 'formulario',
+  usuarioSeleccionado: id,
+ })
+}
+
+
+  render() {
+    
+    
+    const { ruta, data } = this.state
+
+    return (<div>
+    {/* si 'ruta' es igual '===' a  'algo' entonces '&&'  retorna la '<Vista/>' */}
+      {ruta === 'lista' && 
+      <ViewList  
+      data={data}  
+      handleClick={this.seleccionaUsuario}
+      />}
+      {ruta === 'formulario' && <Userforms />}
+    </div>);
+  }
+}
