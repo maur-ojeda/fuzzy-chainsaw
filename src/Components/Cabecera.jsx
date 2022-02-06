@@ -23,9 +23,10 @@ const styles = {
 
 export default class Cabecera extends Component {
   render() {
+      const { nuevoUsuario } = this.props;
     return (
         <header style={styles.dflex}>
-            <h2>Usuarios</h2> <button style={styles.button}>Nuevo usuario</button>
+            <h2>Usuarios</h2> <button onClick={nuevoUsuario} style={styles.button}>Nuevo usuario</button>
         </header>
     );
   }

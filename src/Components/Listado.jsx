@@ -30,19 +30,30 @@ export default class Listado extends Component {
 
     //usando data attr
     // pasa datos de un elemento hijo a un padre
-    handleClick = e => {
-        const {handleClick} = this.props
-        handleClick(e.target.getAttribute('data-id'))
+    
+    seleccionaUsuario = e => {
+        const {seleccionaUsuario} = this.props
+        seleccionaUsuario(e.target.getAttribute('data-id'))
     }
+
 
     render() {
         const { data } = this.props
+
+
+   /*     console.groupCollapsed('Listado');        
+            console.log('this:', this)
+            console.log('props: ', this.props)
+            console.log('state: ', this.state)
+            console.log('styles: ', styles)
+        console.groupEnd();
+*/
         return (<ul>
 
             {data.map(x =>
                 <li key={x.id} style={styles.dflex}>
                     <span>{x.name}</span>
-                    <button style={styles.button} onClick={this.handleClick} data-id={x.id}>Editar</button>
+                    <button style={styles.button} onClick={this.seleccionaUsuario} data-id={x.id}>Editar</button>
                 </li>
             )}
         </ul>);
